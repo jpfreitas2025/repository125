@@ -20,6 +20,9 @@ execute:
 #| label: setup
 #| echo: false
 
+#opções para exibição de números 
+ options(digits = 5, scipen = 999)
+
 # Carrega os pacotes necessários
 library(tidyverse) # Inclui o dplyr e outros 8 pacotes
 library(gapminder) # Conjunto de dados para os exemplos
@@ -849,7 +852,9 @@ a população para milhões:
 
 ```{r}
 gapminder %>%
-  mutate(pop_em_milhoes = ___)
+  mutate(pop_em_milhoes = pop/1000000 )
+gapminder %>%
+  mutate(receita_total=gdpPercap*pop)
 ```
 
 
