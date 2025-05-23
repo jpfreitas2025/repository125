@@ -1,0 +1,240 @@
+---
+title: "Resolucão da Avaliação 1"
+subtitle: "Introdução à Ciência de Dados - 2025 <br> Bacharelado em Administração"
+author: "joao pedro"
+title-block-banner: "#27445C"
+format:
+  html:
+    embed-resources: true
+    page-layout: article
+    toc: true
+    toc-location: left
+lang: "pt"
+date: 2025-05-14
+date-format: long
+execute: 
+  eval: false
+  echo: true
+  warning: false
+  message: false
+crossref:
+  fig-prefix: 'Fig.'
+  tbl-prefix: 'Tab.'
+---
+
+
+```{r}
+#| label: setup
+#| echo: false
+
+# configura a exibição de números
+options(digits = 3, scipen = 99)
+
+# pacotes utilizados
+library(here)
+library(tidyverse)
+library(kableExtra)
+```
+
+
+
+## Questão 1 
+
+
+**a)** 
+
+
+**b)** 
+
+
+
+
+## Questão 2 
+
+
+**a)** 
+
+```{r}
+
+# Importa o arquivo de dados
+
+## 1.1 Define o caminho relativo do arquivo em seu projeto RStudio
+
+caminho_arquivo <- here::here("dados", "brutos", "onlineshop.csv")
+
+
+
+## 1.2 Importa o arquivo com a funçào read_csv
+
+dados_lojaonline. <- readr::read_csv(caminho_arquivo)
+
+
+```
+
+
+**b)** 
+
+```{r}
+
+# Seu código aqui
+```
+
+
+**c.1)** 
+
+
+
+**c.2)** 
+
+
+
+
+## Questão 3 (8 pontos)
+
+### Tópico: Limpeza e Preparação dos Dados 
+
+**a)** 
+
+```{r}
+
+dados_lojaonline_limpos <- dados_lojaonline %>% 
+    # Renomeia as colunas para nomes mais simples em português
+   rename(
+      data = DATE,
+      id_cliente = USER_ID,
+      idade = AGE,
+      sexo = GENDER,
+      tipo = TYPE,
+      score_de_credito = CREDIT_SCORE,
+      tempo_da_conta = LIFETIME,
+      metodo_pagamento = PAYMENT_METHOD,
+      faturamento = TURNOVER,
+      devolucao = SENDBACK,
+      tipo_de_anuncio = VIDEO_AD,
+      convertido = CONVERTED
+   ) %>% 
+    # Converte cada variável para o tipo/classe adequado
+   mutate(
+      data = as.Date(____),
+      id_cliente = as.factor(______),
+      idade = as.integer(______),
+      sexo = as.factor(______),
+      tipo = as.factor(______),
+      score_de_credito = factor(______, ordered = TRUE),
+      tempo_da_conta = as.integer(______),
+      metodo_pagamento = as.factor(______),
+      faturamento = as.numeric(______),
+      devolucao = as.logical(______),
+      tipo_de_anuncio = as.logical(______),
+      convertido = as.logical(______)
+   )
+
+# exibe a estrutura da data frame limpa
+dplyr::glimpse(______)
+```
+
+
+**b)** 
+
+```{r}
+
+# Seu código aqui
+```
+
+
+**b.1)** 
+
+
+**b.2)** 
+
+
+**b.3)** 
+
+- Faturamento médio = 
+
+- Faturamento máximo = 
+
+- Faturamento mínimo = 
+
+
+
+
+## Questão 4 (10 pontos)
+
+ 
+**a)** 
+
+
+```{r}
+
+faturamento_medio_pagamento <- dados_lojaonline_limpos %>% 
+   group_by(_______) %>% 
+   summarize(faturamento_medio = ____(_______)) %>% 
+   arrange(____(_______))
+
+# exibe o resultado
+faturamento_medio_pagamento
+```
+
+
+
+**b)** 
+
+
+```{r}
+
+clientes_especificos <- dados_lojaonline_limpos %>% 
+   filter(_______) %>% 
+   group_by(_______) %>% 
+   summarize(faturamento_medio_clientes = mean(_______)) %>% 
+   arrange(____(_______))
+
+# exibe o resultado
+clientes_especificos
+```
+
+
+
+**c)** 
+
+
+```{r}
+
+dados_conversao <- dados_lojaonline_limpos %>% 
+   group_by(_______) %>% 
+   summarize(
+      total_de_clientes = n(),
+      porcentagem_de_conversao = mean(_______),
+      faturamento_medio_por_anuncio = mean(_______)
+   )
+
+# exibe o resultado 
+dados_conversao
+```
+
+
+
+**d)** 
+
+
+```{r}
+
+analise_tipo_cliente <- dados_lojaonline_limpos %>%
+  # Agrupa os dados pelo tipo de cliente
+  group_by(____) %>%
+  # Calcula as estatísticas solicitadas para cada grupo
+  summarize(
+    total_transacoes = ___,
+    porcentagem_devolucao = ____(________) * 100,  # Converte proporção para porcentagem
+    faturamento_medio = ____(___________),
+    faturamento_sem_devolucao = ____(___________[_________ == FALSE])
+  )
+
+# exibe o resultado 
+analise_tipo_cliente
+```
+
+
+
+
+
